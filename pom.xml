@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.penelope.quickstart</groupId>
+  <artifactId>quickstartQuartz</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>quickstartQuartz</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <spring-version>4.2.6.RELEASE</spring-version>
+    <quartz-vesion>2.2.3</quartz-vesion>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-core</artifactId>
+          <version>${spring-version}</version>
+      </dependency>
+      <!-- spring-support.jar
+      这个jar 文件包含支持UI模版（Velocity，FreeMarker，JasperReports）
+      ，邮件服务，脚本服务(JRuby)， 缓存Cache（EHCache），
+      任务计划Scheduling（uartz）方面的类。
+      外部依赖spring-context,
+       (spring-jdbc, Velocity, FreeMarker, JasperReports, BSH, Groovy, JRuby, Quartz, EHCache)
+       -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context-support</artifactId>
+      <version>${spring-version}</version>
+    </dependency>
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-tx</artifactId>
+          <version>${spring-version}</version>
+      </dependency>
+    <!-- quartz定时任务 -->
+    <dependency>
+      <groupId>org.quartz-scheduler</groupId>
+      <artifactId>quartz</artifactId>
+      <version>${quartz-vesion}</version>
+    </dependency>
+  </dependencies>
+</project>

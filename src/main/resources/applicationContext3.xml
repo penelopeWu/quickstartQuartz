@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="anotherBean" class="com.penelope.quickstart.jobs.AnotherBean"/>
+
+    <bean id="complexJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="name" value="job1"/>
+        <property name="group" value="group1"/>
+        <property name="jobClass" value="com.penelope.quickstart.jobs.Job3"/>
+        <property name="jobDataMap">
+            <map>
+                <entry key="anotherBean" value-ref="anotherBean"/>
+            </map>
+        </property>
+        <property name="requestsRecovery" value="true"/>
+    </bean>
+
+    <!--简单触发器-->
+    <bean id="trigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <property name="name" value="trigger1"/>
+        <property name="group" value="gruop1"/>
+        <property name="jobDetail" ref="complexJobDetail"/>
+        <property name="startDelay" value="3000"/>
+        <property name="repeatInterval" value="2000"/>
+    </bean>
+    <!--cron触发器-->
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="complexJobDetail"/>
+        <property name="cronExpression" value="0/5 * * ? * *"/>
+    </bean>
+
+    <!--日程管理调度-->
+    <bean id="QuartzStarter" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="jobDetails">
+            <list>
+                <ref bean="complexJobDetail"/>
+            </list>
+        </property>
+        <property name="triggers">
+            <list>
+                <ref bean="trigger"/>
+                <ref bean="cronTrigger"/>
+            </list>
+        </property>
+    </bean>
+</beans>
